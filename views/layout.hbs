@@ -10,10 +10,16 @@
 <body>
 
   <nav>
+    {{#if isConnected}}
+    {{!-- Below line 16 has to be hidden when you're logged out --}}
     <a href="/">Home</a>
+    <a href="/auth/profile">Profile</a>
+    <a href="/auth/logout">Logout</a>
+    {{else}}
+    {{!-- Only show when you're not logged in --}}
     <a href="/auth/login">Login</a>
     <a href="/auth/signup">Signup</a>
-    <a href="/auth/logout">Logout</a>
+    {{/if}}
   </nav>
 
   {{{body}}}
