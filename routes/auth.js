@@ -18,6 +18,11 @@ let transporter = nodemailer.createTransport({
   }
 });
 
+/* req.login(user, function(err) {
+  if (err) { return next(err); }
+  return res.redirect('/firststep/' + req.user._id);
+}); */
+
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
@@ -59,6 +64,8 @@ router.post("/signup", (req, res, next) => {
       email
     });
 
+    
+
     newUser.save()
     .then(() => {
       res.redirect("/"); //redirect to a message page to check your mail (online)
@@ -69,7 +76,9 @@ router.post("/signup", (req, res, next) => {
         to: email, 
         subject: 'Activate AMALGAMATE', 
         text: 'Awesome Message',
-        html: `<a href='http://localhost:3000/'>click me</a>`
+        html: `Welcome to Amalgamate!
+        In order to get started, just click the link and follow the instructions.
+        <a href='http://localhost:3000/validate?secret=${123456789}'>Follow me!</a>`
     })
   })
     
@@ -79,6 +88,13 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get("/validate", (req, res, next) => {
+  //TODO: find the user where secret is req.query.secret and change its status
+  req.login(user, function(err) {
+    if (err) { return next(err); }
+    return res.redirect('/');
+  })
+});
 
 router.get("/profile", (req, res, next) => {
   res.render("profile");
