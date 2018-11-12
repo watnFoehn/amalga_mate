@@ -1,8 +1,34 @@
 body {
+  width: 375px;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font-family: 'Comfortaa', cursive; }
 
 a {
   color: #00B7FF; }
+
+nav {
+  text-decoration: none;
+  color: white; }
+
+button {
+  background: linear-gradient(to bottom right, #ffe140, #fa6c9f);
+  border-radius: 16px 16px 6px 16px;
+  width: 80px;
+  height: 40px;
+  margin: 5px;
+  color: white;
+  font-size: 15px; }
+  button a {
+    color: white;
+    text-decoration: none; }
+
+img {
+  margin: 5px; }
+
+.under {
+  text-decoration: underline; }
+
+.over {
+  text-decoration: overline; }
 
 /*# sourceMappingURL=style.css.map */
