@@ -100,13 +100,14 @@ router.get("/profile", (req, res, next) => {
   res.render("profile");
 })
 
-router.get("/first-profile-step", (req, res, next) => {
-  res.render("first-profile-step");
+router.get("/firststep", (req, res, next) => {
+  res.render("firststep");
 })
 
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
   req.logout();
   res.redirect("/");
 });
+
 
 module.exports = router;
