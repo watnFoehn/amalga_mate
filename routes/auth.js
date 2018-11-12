@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
     user: process.env.GMAIL_MAIL,
-    pass: process.env.GMAIL_PW 
+    pass: process.env.GMAIL_PW
   }
 });
 
@@ -25,11 +25,7 @@ router.get("/login", (req, res, next) => {
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
 router.post("/login", passport.authenticate("local", {
-<<<<<<< HEAD
   successRedirect: "firststep", //the standard was just "/"; so you will land on index page / if we don't succeed with status stuff, we might just want to redirect to first page or profile
-=======
-  successRedirect: "/",
->>>>>>> 6bcf40ad0a626ff3c4d13597fe91b40e5ea7d796
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
@@ -64,22 +60,22 @@ router.post("/signup", (req, res, next) => {
     });
 
     newUser.save()
-    .then(() => {
-      res.redirect("/"); //redirect to a message page to check your mail (online)
-    })
-    .then(() => {
-      transporter.sendMail({
-        from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
-        to: email, 
-        subject: 'Activate AMALGAMATE', 
-        text: 'Awesome Message',
-        html: `<a href='http://localhost:3000/'>click me</a>`
-    })
-  })
-    
-    .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
+      .then(() => {
+        res.redirect("/check-email"); //redirect to a message page to check your mail (online)
+      })
+      .then(() => {
+        transporter.sendMail({
+          from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
+          to: email,
+          subject: 'Activate AMALGAMATE',
+          text: 'Awesome Message',
+          html: `<a href='http://localhost:3000/'>click me</a>`
+        })
+      })
+
+      .catch(err => {
+        res.render("auth/signup", { message: "Something went wrong" });
+      })
   });
 });
 
