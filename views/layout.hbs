@@ -11,13 +11,15 @@
 </head>
 
 <body>
-  
 
   <nav>
 
     {{#if isConnected}}
     {{!-- Below line 16 has to be hidden when you're logged out --}}
-    <a href="/">Amalgamate</a>
+
+    <a href="/">
+    <img src="../images/AmalgaMateLogo.png" alt="Ironhack2018">
+    </a>
     <a href="/auth/profile">Profile</a>
     <a href="/auth/logout">Logout</a>
     {{else}}
@@ -27,7 +29,7 @@
     {{/if}}
   </nav>
 
-{{{body}}}
+  {{{body}}}
 
   <script src="/javascripts/script.js"></script>
 </body>

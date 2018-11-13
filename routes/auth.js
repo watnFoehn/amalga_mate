@@ -25,11 +25,8 @@ router.get("/login", (req, res, next) => {
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
 router.post("/login", passport.authenticate("local", {
-<<<<<<< HEAD
   successRedirect: "firststep", //the standard was just "/"; so you will land on index page / if we don't succeed with status stuff, we might just want to redirect to first page or profile
-=======
   successRedirect: "/",
->>>>>>> 6bcf40ad0a626ff3c4d13597fe91b40e5ea7d796
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
