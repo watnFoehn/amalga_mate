@@ -2,7 +2,7 @@
 
 <img src="http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" style="width: 50%">
 
-<form class="container">
+<form action="auth/firststep" method="POST" class="container">
   <div class="flex">
     <h3 class="flex">Sport</h3>
     <label class="switch flex">
@@ -11,7 +11,7 @@
     </label>
   </div>
   <div>
-    <textarea id="toggle1" class="flxcol" name="message" style="display:none"></textarea>
+    <textarea id="toggle1" class="flxcol" name="sports" style="display:none"></textarea>
   </div>
 
   <div class="flex">
@@ -22,7 +22,7 @@
     </label>
   </div>
   <div>
-    <textarea id="toggle2" class="flxcol" name="message" style="display:none"></textarea>
+    <textarea id="toggle2" class="flxcol" name="music" style="display:none"></textarea>
   </div>
 
   <div class="flex">
@@ -33,19 +33,18 @@
     </label>
   </div>
   <div>
-    <textarea id="toggle3" class="flxcol" name="message" style="display:none"></textarea>
+    <textarea id="toggle3" class="flxcol" name="learnGroup" placeholder="something" style="display:none"></textarea>
   </div>
 
   <div class="flex">
-    <h3>Language
-      <br>Preferences</h3>
+    <h3>Language</h3>
     <label class="switch flex">
       <input type="checkbox">
-      <span class="slider round" id="lgprf"></span>
+      <span class="slider round" id="languages"></span>
     </label>
   </div>
   <div>
-    <textarea id="toggle4" class="flxcol" name="message" style="display:none"></textarea>
+    <textarea id="toggle4" class="flxcol" name="languages" style="display:none"></textarea>
   </div>
 
   <div class="flex">
@@ -56,18 +55,7 @@
     </label>
   </div>
   <div>
-    <textarea id="toggle5" class="flxcol" name="message" style="display:none"></textarea>
-  </div>
-
-  <div class="flex">
-    <h3>Location</h3>
-    <label class="switch flex">
-      <input type="checkbox">
-      <span class="slider round" id="location"></span>
-    </label>
-  </div>
-  <div>
-    <textarea id="toggle6" class="flxcol" name="message" style="display:none"></textarea>
+    <textarea id="toggle5" class="flxcol" name="culinary" style="display:none"></textarea>
   </div>
 
   <div class="flex">
@@ -78,10 +66,24 @@
     </label>
   </div>
   <div>
-    <textarea id="toggle7" class="flxcol" name="message" style="display:none"></textarea>
+    <textarea id="toggle7" class="flxcol" name="getInTouch" style="display:none"></textarea>
   </div>
+
+{{!-- 
+  <div class="flex">
+    <h3>Location</h3>
+    <label class="switch flex">
+      <input type="checkbox">
+      <span class="slider round" id="location"></span>
+    </label>
+  </div>
+  <div>
+    <textarea id="toggle6" class="flxcol" name="location" style="display:none"></textarea>
+  </div> --}}
+
+  <br>
   <button type="submit">SUBMIT</button>
-  <input type="submit" value="SUBMIT2">
+  {{!-- <input type="submit" value="SUBMIT2"> --}}
 
 </form>
 <br>

@@ -17,7 +17,7 @@ $(document).ready(function () {
     $("#toggle3").toggle();
   });
 
-  $("#lgprf").click(function () {
+  $("#languages").click(function () {
     $("#toggle4").toggle();
   });
 
@@ -29,7 +29,6 @@ $(document).ready(function () {
     $("#toggle6").toggle();
   });
   
-
   $("#getintch").click(function () {
     $("#toggle7").toggle();
   });
