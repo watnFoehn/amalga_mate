@@ -147,4 +147,9 @@ textarea {
 .over {
   text-decoration: overline; }
 
+::placeholder {
+  color: rgba(0, 0, 0, 0.363);
+  font-family: 'Comfortaa', cursive;
+  font-size: 15px; }
+
 /*# sourceMappingURL=style.css.map */
