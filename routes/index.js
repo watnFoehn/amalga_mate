@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -24,6 +24,10 @@ router.get("/public-profile", (req, res, next) => {
 
 router.get("/owned-profile", (req, res, next) => {
   res.render("owned-profile");
+});
+
+router.get("/check-email", (req, res, next) => {
+  res.render("check-email");
 });
 
 

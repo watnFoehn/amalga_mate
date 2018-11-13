@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
     user: process.env.GMAIL_MAIL,
-    pass: process.env.GMAIL_PW 
+    pass: process.env.GMAIL_PW
   }
 });
 
@@ -30,7 +30,7 @@ router.get("/login", (req, res, next) => {
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/main-page",
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
@@ -79,7 +79,7 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
     .then(() => {
-      res.redirect("/"); //redirect to a message page to check your mail (online)
+      res.redirect("/check-email"); //redirect to a message page to check your mail (online)
     })
     .then(() => {
       transporter.sendMail({
