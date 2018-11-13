@@ -29,9 +29,11 @@ router.get("/login", (req, res, next) => {
 
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
-router.post("/login", passport.authenticate("local", {
+router.post("/login", passport.authenticate("local", 
+
+{
   successRedirect: "/main-page",
-  failureRedirect: "/auth/login",
+  failureRedirect: "/check-email",
   failureFlash: true,
   passReqToCallback: true
 }));
@@ -113,22 +115,7 @@ router.get("/validate", (req, res, next) => {
     console.log(err)
   })
   })
-  /* console.log(req);
-  if (req.query.secret == user.secret) {
-    res.send('success')
-  } */
   
-  /*
-  req.login(user, function(err) {
-    if (err) { return next(err); }
-    return res.redirect('/firststep');
-  })*/ 
-  
-
-router.get('/ping', function(req, res){
-  res.status(200).send("pong!");
-});
-
 router.get("/profile", (req, res, next) => {
   res.render("profile");
 })

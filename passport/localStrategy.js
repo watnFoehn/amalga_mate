@@ -5,20 +5,28 @@ const bcrypt        = require('bcrypt');
 
 passport.use(new LocalStrategy({
     usernameField: 'username',
-    passwordField: 'password'
+    passwordField: 'password',
+   
   }, 
   (username, password, done) => {
     User.findOne({ username })
     .then(foundUser => {
+      
       if (!foundUser) {
         done(null, false, { message: 'Incorrect username' });
         return;
       }
-
+     
       if (!bcrypt.compareSync(password, foundUser.password)) {
         done(null, false, { message: 'Incorrect password' });
         return;
       }
+
+      if (foundUser.status = 'Pending Confirmation') {
+        done(null, false, { message: 'Please use the link from the email we sent you' });
+        // res.redirect('/firststep')
+        return;
+      } 
 
       done(null, foundUser);
     })

@@ -11,14 +11,18 @@ body {
 h1 {
   margin-top: 95px; }
 
-ul {
-  margin: 99px 0px;
+#lp-ul {
+  margin: 50px 0px;
   padding: 30px;
   display: flex;
   flex-direction: column; }
 
 li {
   flex: 1; }
+
+#img-logo {
+  width: 100px;
+  height: 75px; }
 
 a {
   flex: 1;
