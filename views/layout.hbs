@@ -12,37 +12,43 @@
 
 <body>
 
-  <nav>
 
-    {{#if isConnected}}
-    {{!-- Below line 16 has to be hidden when you're logged out --}}
+    <nav>
+      {{#if isConnected}}
+      {{!-- Below line 16 has to be hidden when you're logged out --}}
 
-    <a href="/auth/main-page">
-    <img src="../images/AmalgaMateLogo.png" alt="Ironhack2018">
-    </a>
-    <a href="/auth/profile">Profile</a>
-    <a href="/auth/logout">Logout</a>
-    {{else}}
-    {{!-- Only show when you're not logged in --}}
-    {{!-- <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Signup</a> --}}
-    {{/if}}
-  </nav>
+      <a href="/auth/main-page">
+        <img src="../images/AmalgaMateLogo.png" alt="Ironhack2018">
+      </a>
+      <a href="/auth/profile">Profile</a>
+      <a href="/auth/logout">Logout</a>
+      {{else}}
+      {{!-- Only show when you're not logged in --}}
+      {{!-- <a href="/auth/login">Login</a>
+      <a href="/auth/signup">Signup</a> --}}
+      {{/if}}
+    </nav>
+  <div class="wrap">
 
-  {{{body}}}
-<footer>
-  <span>
-  <a href="/about">About</a> 
-  </span>
-  |
-  <span>
-    &copy; Copyright 2018 by amangamangateam
-  </span>
-  |
-  <span>
-  Made with ❤ (and bad jokes) in Berlin
-  </span>
-  </footer>
+    {{{body}}}
+
+  </div>
+    <footer>
+      <div id="footid">
+        <span>
+          <a href="/about">About</a>
+        </span>
+        |
+        <span>
+          &copy; Copyright 2018 by amangamangateam
+        </span>
+        |
+        <span>
+          Made with ❤ (and bad jokes) in Berlin
+        </span>
+      </div>
+    </footer>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="/javascripts/script.js"></script>
