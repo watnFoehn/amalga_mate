@@ -13,7 +13,7 @@ const userSchema = new Schema({
     unique: true,
     match: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   }, String,
-  confirmationCode: String,
+  secret: String,
 
   img: String,
   learnGroup: String,

@@ -18,15 +18,22 @@ let transporter = nodemailer.createTransport({
   }
 });
 
+/* req.login(user, function(err) {
+  if (err) { return next(err); }
+  return res.redirect('/firststep/' + req.user._id);
+}); */
+
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "firststep", //the standard was just "/"; so you will land on index page / if we don't succeed with status stuff, we might just want to redirect to first page or profile
-  failureRedirect: "/auth/login",
+router.post("/login", passport.authenticate("local", 
+
+{
+  successRedirect: "/main-page",
+  failureRedirect: "/check-email",
   failureFlash: true,
   passReqToCallback: true
 }));
@@ -50,36 +57,65 @@ router.post("/signup", (req, res, next) => {
       return;
     }
 
+    function generateSecret() {
+      let text = "";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (let i = 0; i < 8; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    
+      return text;
+    }
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
+    const secret = generateSecret();
 
     const newUser = new User({
       username,
       password: hashPass,
-      email
+      email,
+      secret
     });
 
-    newUser.save()
-      .then(() => {
-        res.redirect("/check-email"); //redirect to a message page to check your mail (online)
-      })
-      .then(() => {
-        transporter.sendMail({
-          from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
-          to: email,
-          subject: 'Activate AMALGAMATE',
-          text: 'Awesome Message',
-          html: `<a href='http://localhost:3000/'>click me</a>`
-        })
-      })
+    
 
-      .catch(err => {
-        res.render("auth/signup", { message: "Something went wrong" });
-      })
+    newUser.save()
+    .then(() => {
+      res.redirect("/check-email"); //redirect to a message page to check your mail (online)
+    })
+    .then(() => {
+      transporter.sendMail({
+        from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
+        to: email, 
+        subject: 'Activate AMALGAMATE', 
+        text: 'Awesome Message',
+        html: `Welcome to Amalgamate!
+        In order to get started, just click the link and follow the instructions.
+        <a href='http://localhost:3000/auth/validate?secret=${secret}'>Follow me!</a>`
+    })
+  })
+    
+    .catch(err => {
+      res.render("auth/signup", { message: "Something went wrong" });
+    })
   });
 });
 
-
+router.get("/validate", (req, res, next) => {
+  console.log('was able to access')
+  console.log(req.query.secret)
+  User.findOneAndUpdate({secret: req.query.secret}, { $set: {status: 'Active'}})
+  .then((user) => {
+    req.login(user, loginError => {
+      req.flash('You are now logged in!');
+      res.redirect("/firststep");
+      });
+  })
+  .catch(err => {
+    console.log(err)
+  })
+  })
+  
 router.get("/profile", (req, res, next) => {
   res.render("profile");
 })
@@ -93,5 +129,8 @@ router.get("/logout", (req, res, next) => {
   res.redirect("/");
 });
 
+router.get("/test", (req, res, next) => {
+  res.send("test");
+})
 
 module.exports = router;
