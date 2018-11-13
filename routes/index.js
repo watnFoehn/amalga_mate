@@ -30,7 +30,9 @@ router.get("/check-email", (req, res, next) => {
   res.render("check-email");
 });
 
-
+router.get("/about", (req, res, next) => {
+  res.render("about");
+})
 
 
 module.exports = router;
