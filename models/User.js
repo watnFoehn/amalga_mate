@@ -17,11 +17,12 @@ const userSchema = new Schema({
 
   img: String,
   learnGroup: String,
-  languagePreferences: String,
+  languages: String,
   location: String,
-  getInTouchBy: String,
+  getInTouch: String,
   music: String,
   sports: String,
+  culinary: String,
 
 }, {
     timestamps: {

@@ -133,4 +133,32 @@ router.get("/test", (req, res, next) => {
   res.send("test");
 })
 
+router.post('/firststep', (req, res) => {
+  let sports = req.body.sports;
+  let music = req.body.music;
+  let learnGroup = req.body.learnGroup;
+  let languages = req.body.languages;
+  let culinary = req.body.culinary;
+  let getInTouch = req.body.getInTouch;
+
+  console.log(sports)
+
+  User.findByIdAndUpdate(req.user._id,
+    {$set: {
+      sports: sports,
+      music: music,
+      learnGroup: learnGroup,
+      languages: languages,
+      culinary: culinary,
+      getInTouch: getInTouch
+    }}, 
+    function(err){
+    if(err){
+        console.log(err);
+    }
+});
+  
+  res.redirect('../main-page')
+})
+
 module.exports = router;
