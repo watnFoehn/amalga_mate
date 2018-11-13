@@ -55,13 +55,24 @@ router.post("/signup", (req, res, next) => {
       return;
     }
 
+    function generateSecret() {
+      let text = "";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (let i = 0; i < 8; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    
+      return text;
+    }
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
+    const secret = generateSecret();
 
     const newUser = new User({
       username,
       password: hashPass,
-      email
+      email,
+      secret
     });
 
     
@@ -78,7 +89,7 @@ router.post("/signup", (req, res, next) => {
         text: 'Awesome Message',
         html: `Welcome to Amalgamate!
         In order to get started, just click the link and follow the instructions.
-        <a href='http://localhost:3000/validate?secret=${123456789}'>Follow me!</a>`
+        <a href='http://localhost:3000/auth/validate?secret=${secret}'>Follow me!</a>`
     })
   })
     
@@ -89,11 +100,33 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.get("/validate", (req, res, next) => {
-  //TODO: find the user where secret is req.query.secret and change its status
+  console.log('was able to access')
+  console.log(req.query.secret)
+  User.findOneAndUpdate({secret: req.query.secret}, { $set: {status: 'Active'}})
+  .then((user) => {
+    req.login(user, loginError => {
+      req.flash('You are now logged in!');
+      res.redirect("/firststep");
+      });
+  })
+  .catch(err => {
+    console.log(err)
+  })
+  })
+  /* console.log(req);
+  if (req.query.secret == user.secret) {
+    res.send('success')
+  } */
+  
+  /*
   req.login(user, function(err) {
     if (err) { return next(err); }
-    return res.redirect('/');
-  })
+    return res.redirect('/firststep');
+  })*/ 
+  
+
+router.get('/ping', function(req, res){
+  res.status(200).send("pong!");
 });
 
 router.get("/profile", (req, res, next) => {
@@ -109,5 +142,8 @@ router.get("/logout", (req, res, next) => {
   res.redirect("/");
 });
 
+router.get("/test", (req, res, next) => {
+  res.send("test");
+})
 
 module.exports = router;
