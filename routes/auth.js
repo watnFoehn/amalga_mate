@@ -114,16 +114,17 @@ router.get("/validate", (req, res, next) => {
   })
   })
 
-  router.get("/main-page", (req, res, next) => {
+  router.get("/firststep", (req, res, next) => {
     User.findOne({ _id: req.user._id })
       .then(data => {
-        res.render("auth/main-page", { data });
+        res.render("/main-page", { data });
       })
-      .catch(error => {
-        console.log(error)
+      .catch(err => {
+        console.log(err)
       })
   });
 
+  
 router.get("/profile", (req, res, next) => {
   res.render("profile");
 })

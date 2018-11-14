@@ -11,9 +11,6 @@ router.get("/firststep", (req, res, next) => {
   res.render("firststep");
 });
 
-
-
-
 router.get("/filtered-page", (req, res, next) => {
   res.render("filtered-page");
 });
