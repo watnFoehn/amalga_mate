@@ -155,6 +155,7 @@ textarea {
   color: rgba(0, 0, 0, 0.363);
   font-family: 'Comfortaa', cursive;
   font-size: 15px; }
+
 footer {
   display: flex;
   background: linear-gradient(to bottom, #75679c, #1b183a);
