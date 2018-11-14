@@ -23,7 +23,7 @@ passport.use(new LocalStrategy({
       }
 
       if (foundUser.status = 'Pending Confirmation') {
-        done(null, false, { message: 'Please use the link from the email we sent you' });
+        done(null, false);
         // res.redirect('/firststep')
         return;
       } 
