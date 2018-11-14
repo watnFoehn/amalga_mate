@@ -32,7 +32,7 @@ Never logged in before */
 router.post("/login", passport.authenticate("local", 
 
 {
-  successRedirect: "/main-page",
+  successRedirect: "main-page",
   failureRedirect: "/check-email",
   failureFlash: true,
   passReqToCallback: true

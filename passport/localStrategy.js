@@ -22,7 +22,7 @@ passport.use(new LocalStrategy({
         return;
       }
 
-      if (foundUser.status = 'Pending Confirmation') {
+      if (foundUser.status != 'Active') {
         done(null, false);
         // res.redirect('/firststep')
         return;
