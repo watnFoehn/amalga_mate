@@ -2,10 +2,16 @@
 
   <h1>Fill in the fields of interest</h1>
   <img src="http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" class="imgPro">
+  {{!-- <input type="file" name="pic" accept="image/gif, image/jpeg, image/png"> --}}
+
+  {{!-- <form action="/firststep" method="post" enctype="multipart/form-data">
+    <input type="file" name="photo" accept="image/gif, image/jpeg, image/png">
+  </form> --}}
+
 
 </div>
 <div class="test">
-  <div action="auth/firststep" method="POST" class="container">
+  <form action="auth/firststep" method="POST" class="container">
     <div class="flex">
       <h3 class="flex">Sport</h3>
       <label class="switch flex">
@@ -25,7 +31,7 @@
       </label>
     </div>
     <div>
-      <textarea id="toggle2" class="flxcol" name="music" style="display:none" placeholder="e.g.: Emina Sonnad, Johann Sebastian Bach, Freddy Mercury"></textarea>
+      <textarea id="toggle2" class="flxcol" name="music" style="display:none" placeholder="e.g.: Johann Sebastian Bach, Freddy Mercury"></textarea>
     </div>
     <hr>
 
@@ -90,9 +96,12 @@
     </div> --}}
 
     <br>
-    <button type="submit">SUBMIT</button>
-    {{!-- <input type="submit" value="SUBMIT2"> --}}
-  </div>
+
+    <div id="flexbtn">
+      <button type="submit">SUBMIT</button>
+      {{!-- <input type="submit" value="SUBMIT2"> --}}
+    </div>
+  </form>
 </div>
 
 </form>
