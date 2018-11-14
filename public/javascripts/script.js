@@ -4,6 +4,8 @@ $(document).ready(function () {
     console.log('TEST JS imported successfully!');
 
   }, false);
+  
+  // SHOW/HIDE TEXTAREA 
 
   $("#sport").click(function () {
     $("#toggle1").toggle();

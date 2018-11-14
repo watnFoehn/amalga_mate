@@ -120,8 +120,29 @@ router.get("/main-page", (req, res, next) => {
     .then(data => {
       res.render("auth/main-page", { data });
     })
-    .catch(error => {
-      console.log(error)
+    .catch(err => {
+      console.log(err)
+    })
+});
+
+router.get("/owned-profile", (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then(data => {
+      res.render("owned-profile", { data });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+});
+
+router.get("/public-profile/:username", (req, res, next) => {
+  console.log(req.params.username);
+  User.findOne({ username: req.params.username })
+    .then(data => {
+      res.render("public-profile", { data });
+    })
+    .catch(err => {
+      console.log(err)
     })
 });
 
