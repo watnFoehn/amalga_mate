@@ -142,9 +142,6 @@ router.get("/logout", (req, res, next) => {
   res.redirect("/");
 });
 
-router.get("/test", (req, res, next) => {
-  res.send("test");
-})
 
 router.post('/firststep', (req, res) => {
   let sports = req.body.sports;
@@ -153,8 +150,6 @@ router.post('/firststep', (req, res) => {
   let languages = req.body.languages;
   let culinary = req.body.culinary;
   let getInTouch = req.body.getInTouch;
-
-  console.log(sports)
 
   User.findByIdAndUpdate(req.user._id,
     {$set: {
@@ -171,8 +166,7 @@ router.post('/firststep', (req, res) => {
         console.log(err);
     }
 });
-  
-  res.redirect('../main-page')
+  res.redirect('../auth/main-page')
 })
 
 module.exports = router;
