@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const nodemailer = require('nodemailer');
+const uploadCloud = require('../config/cloudinary.js');
 
 
 // Bcrypt to encrypt passwords
@@ -155,14 +156,14 @@ router.get("/firststep", (req, res, next) => {
 
 router.get("/filtered-page", (req, res, next) => {
   let query = req.query.q
-  User.find({[query]:{$ne:null}})
-      .then(data => {
-        res.render("filtered-page", { data });
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  })
+  User.find({ [query]: { $ne: null } })
+    .then(data => {
+      res.render("filtered-page", { data });
+    })
+    .catch(error => {
+      console.log(error)
+    })
+})
 
 router.get("/logout", (req, res, next) => {
   req.logout();
@@ -170,17 +171,23 @@ router.get("/logout", (req, res, next) => {
 });
 
 
-router.post('/firststep', (req, res) => {
+router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
   let sports = req.body.sports;
   let music = req.body.music;
   let learnGroup = req.body.learnGroup;
   let languages = req.body.languages;
   let culinary = req.body.culinary;
   let getInTouch = req.body.getInTouch;
+  let imgPath = req.file.url;
+  let imgName = req.file.originalname;
 
   User.findByIdAndUpdate(req.user._id,
     {
+      imgPath,
+      imgName,
       $set: {
+        // imgPath: imgPath,
+        // imgName: imgName,
         sports: sports,
         music: music,
         learnGroup: learnGroup,
@@ -197,5 +204,22 @@ router.post('/firststep', (req, res) => {
     });
   res.redirect('../auth/main-page')
 })
+
+// router.post('/firststep', uploadCloud.single('photo'), (req, res, next) => {
+//   const imgPath = req.file.url;
+//   const imgName = req.file.originalname;
+//   User.findByIdAndUpdate(req.user._id, {
+//     imgName,
+//     imgPath
+//   })
+//     .then(() => {
+//       res.redirect('/');
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     })
+// });
+
+
 
 module.exports = router;

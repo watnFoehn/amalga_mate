@@ -15,7 +15,8 @@ const userSchema = new Schema({
   }, String,
   secret: String,
 
-  img: String,
+  imgName: String,
+  imgPath: String,
   learnGroup: String,
   languages: String,
   location: String,
