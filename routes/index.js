@@ -20,8 +20,8 @@ router.get("/filtered-page", (req, res, next) => {
 //   res.render("public-profile");
 // });
 
-router.get("/owned-profile", (req, res, next) => {
-  res.render("owned-profile");
+router.get("/my-profile", (req, res, next) => {
+  res.render("my-profile");
 });
 
 router.get("/check-email", (req, res, next) => {
