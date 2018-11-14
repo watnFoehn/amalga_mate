@@ -29,14 +29,14 @@ router.get("/login", (req, res, next) => {
 
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
 
-{
-  successRedirect: "main-page",
-  failureRedirect: "/check-email",
-  failureFlash: true,
-  passReqToCallback: true
-}));
+  {
+    successRedirect: "main-page",
+    failureRedirect: "/check-email",
+    failureFlash: true,
+    passReqToCallback: true
+  }));
 
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
@@ -60,10 +60,10 @@ router.post("/signup", (req, res, next) => {
     function generateSecret() {
       let text = "";
       let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    
+
       for (let i = 0; i < 8; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
+
       return text;
     }
     const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -77,54 +77,73 @@ router.post("/signup", (req, res, next) => {
       secret
     });
 
-    
+
 
     newUser.save()
-    .then(() => {
-      res.redirect("/check-email"); //redirect to a message page to check your mail (online)
-    })
-    .then(() => {
-      transporter.sendMail({
-        from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
-        to: email, 
-        subject: 'Activate AMALGAMATE', 
-        text: 'Awesome Message',
-        html: `Welcome to Amalgamate!
+      .then(() => {
+        res.redirect("/check-email"); //redirect to a message page to check your mail (online)
+      })
+      .then(() => {
+        transporter.sendMail({
+          from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
+          to: email,
+          subject: 'Activate AMALGAMATE',
+          text: 'Awesome Message',
+          html: `Welcome to Amalgamate!
         In order to get started, just click the link and follow the instructions.
         <a href='http://localhost:3000/auth/validate?secret=${secret}'>Follow me!</a>`
-    })
-  })
-    
-    .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
+        })
+      })
+
+      .catch(err => {
+        res.render("auth/signup", { message: "Something went wrong" });
+      })
   });
 });
 
 router.get("/validate", (req, res, next) => {
-  User.findOne({secret: req.query.secret})
-  .then((user) => {
-    req.login(user, loginError => {
-      req.flash('You are now logged in!');
-      res.redirect("/firststep");
+  User.findOne({ secret: req.query.secret })
+    .then((user) => {
+      req.login(user, loginError => {
+        req.flash('You are now logged in!');
+        res.redirect("/firststep");
       });
-  })
-  .catch(err => {
-    console.log(err)
-  })
-  })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
 
-  router.get("/firststep", (req, res, next) => {
-    User.findOne({ _id: req.user._id })
-      .then(data => {
-        res.render("/main-page", { data });
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  });
+router.get("/main-page", (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then(data => {
+      res.render("auth/main-page", { data });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+});
 
-  
+router.get("/owned-profile", (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then(data => {
+      res.render("owned-profile", { data });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+});
+
+router.get("/public-profile", (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then(data => {
+      res.render("public-profile", { data });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+});
+
 router.get("/profile", (req, res, next) => {
   res.render("profile");
 })
@@ -153,20 +172,22 @@ router.post('/firststep', (req, res) => {
   let getInTouch = req.body.getInTouch;
 
   User.findByIdAndUpdate(req.user._id,
-    {$set: {
-      sports: sports,
-      music: music,
-      learnGroup: learnGroup,
-      languages: languages,
-      culinary: culinary,
-      getInTouch: getInTouch,
-      status: 'Active'
-    }}, 
-    function(err){
-    if(err){
+    {
+      $set: {
+        sports: sports,
+        music: music,
+        learnGroup: learnGroup,
+        languages: languages,
+        culinary: culinary,
+        getInTouch: getInTouch,
+        status: 'Active'
+      }
+    },
+    function (err) {
+      if (err) {
         console.log(err);
-    }
-});
+      }
+    });
   res.redirect('../auth/main-page')
 })
 
