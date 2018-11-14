@@ -1,3 +1,13 @@
 <h1>Filtered Page</h1>
 
 {{!-- https://balsamiq.cloud/sw2slnu/py6rvpu/r2835 --}}
+
+What you filtered for: 
+
+<ul>
+  {{date.username}}
+{{#each data}}
+<a href='/auth/public-profile/{{this.username}}'><li>{{this.username}}</li></a>
+{{/each}}
+</ul>
+{{!-- <a href=`public-profile/{{data.username}}`>{{data.username}}</a> --}}

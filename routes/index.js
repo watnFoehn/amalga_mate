@@ -15,9 +15,9 @@ router.get("/filtered-page", (req, res, next) => {
   res.render("filtered-page");
 });
 
-router.get("/public-profile", (req, res, next) => {
-  res.render("public-profile");
-});
+// router.get("/public-profile", (req, res, next) => {
+//   res.render("public-profile");
+// });
 
 router.get("/owned-profile", (req, res, next) => {
   res.render("owned-profile");

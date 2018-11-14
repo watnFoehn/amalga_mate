@@ -134,8 +134,9 @@ router.get("/owned-profile", (req, res, next) => {
     })
 });
 
-router.get("/public-profile", (req, res, next) => {
-  User.findOne({ _id: req.user._id })
+router.get("/public-profile/:username", (req, res, next) => {
+  console.log(req.params.username);
+  User.findOne({ username: req.params.username })
     .then(data => {
       res.render("public-profile", { data });
     })
@@ -153,9 +154,15 @@ router.get("/firststep", (req, res, next) => {
 })
 
 router.get("/filtered-page", (req, res, next) => {
-  console.log(req.query)
-  res.render("filtered-page")
-})
+  let query = req.query.q
+  User.find({[query]:{$ne:null}})
+      .then(data => {
+        res.render("filtered-page", { data });
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  })
 
 router.get("/logout", (req, res, next) => {
   req.logout();
