@@ -33,7 +33,7 @@ Never logged in before */
 router.post("/login", passport.authenticate("local",
 
   {
-    successRedirect: "/main-page",
+    successRedirect: "main-page",
     failureRedirect: "/check-email",
     failureFlash: true,
     passReqToCallback: true
@@ -134,8 +134,14 @@ router.get("/firststep", (req, res, next) => {
 })
 
 router.get("/filtered-page", (req, res, next) => {
-  console.log(req.query)
-  res.render("filtered-page")
+  let query = req.query.q
+  User.find({ [query]: { $ne: null } })
+    .then(data => {
+      res.render("filtered-page", { data });
+    })
+    .catch(error => {
+      console.log(error)
+    })
 })
 
 router.get("/logout", (req, res, next) => {
