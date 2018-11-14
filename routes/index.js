@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const User = require("../models/User");
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -10,9 +11,8 @@ router.get("/firststep", (req, res, next) => {
   res.render("firststep");
 });
 
-router.get("/main-page", (req, res, next) => {
-  res.render("main-page");
-});
+
+
 
 router.get("/filtered-page", (req, res, next) => {
   res.render("filtered-page");
@@ -30,7 +30,9 @@ router.get("/check-email", (req, res, next) => {
   res.render("check-email");
 });
 
-
+router.get("/about", (req, res, next) => {
+  res.render("about");
+})
 
 
 module.exports = router;

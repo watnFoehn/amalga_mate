@@ -102,9 +102,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.get("/validate", (req, res, next) => {
-  console.log('was able to access')
-  console.log(req.query.secret)
-  User.findOneAndUpdate({secret: req.query.secret}, { $set: {status: 'Active'}})
+  User.findOne({secret: req.query.secret})
   .then((user) => {
     req.login(user, loginError => {
       req.flash('You are now logged in!');
@@ -115,13 +113,28 @@ router.get("/validate", (req, res, next) => {
     console.log(err)
   })
   })
-  
+
+  router.get("/main-page", (req, res, next) => {
+    User.findOne({ _id: req.user._id })
+      .then(data => {
+        res.render("auth/main-page", { data });
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  });
+
 router.get("/profile", (req, res, next) => {
   res.render("profile");
 })
 
 router.get("/firststep", (req, res, next) => {
   res.render("firststep");
+})
+
+router.get("/filtered-page", (req, res, next) => {
+  console.log(req.query)
+  res.render("filtered-page")
 })
 
 router.get("/logout", (req, res, next) => {
@@ -150,7 +163,8 @@ router.post('/firststep', (req, res) => {
       learnGroup: learnGroup,
       languages: languages,
       culinary: culinary,
-      getInTouch: getInTouch
+      getInTouch: getInTouch,
+      status: 'Active'
     }}, 
     function(err){
     if(err){
