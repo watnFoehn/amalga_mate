@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const nodemailer = require('nodemailer');
+const uploadCloud = require('../config/cloudinary.js');
 
 
 // Bcrypt to encrypt passwords
@@ -29,14 +30,14 @@ router.get("/login", (req, res, next) => {
 
 /* We need to make sure that this will only be true if the status is something like:
 Never logged in before */
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
 
-{
-  successRedirect: "/main-page",
-  failureRedirect: "/check-email",
-  failureFlash: true,
-  passReqToCallback: true
-}));
+  {
+    successRedirect: "/main-page",
+    failureRedirect: "/check-email",
+    failureFlash: true,
+    passReqToCallback: true
+  }));
 
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
@@ -60,10 +61,10 @@ router.post("/signup", (req, res, next) => {
     function generateSecret() {
       let text = "";
       let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    
+
       for (let i = 0; i < 8; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
+
       return text;
     }
     const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -77,52 +78,52 @@ router.post("/signup", (req, res, next) => {
       secret
     });
 
-    
+
 
     newUser.save()
-    .then(() => {
-      res.redirect("/check-email"); //redirect to a message page to check your mail (online)
-    })
-    .then(() => {
-      transporter.sendMail({
-        from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
-        to: email, 
-        subject: 'Activate AMALGAMATE', 
-        text: 'Awesome Message',
-        html: `Welcome to Amalgamate!
+      .then(() => {
+        res.redirect("/check-email"); //redirect to a message page to check your mail (online)
+      })
+      .then(() => {
+        transporter.sendMail({
+          from: '"AMALGAMATE" <ironhack.amalgamate@gmail.com>',
+          to: email,
+          subject: 'Activate AMALGAMATE',
+          text: 'Awesome Message',
+          html: `Welcome to Amalgamate!
         In order to get started, just click the link and follow the instructions.
         <a href='http://localhost:3000/auth/validate?secret=${secret}'>Follow me!</a>`
-    })
-  })
-    
-    .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
+        })
+      })
+
+      .catch(err => {
+        res.render("auth/signup", { message: "Something went wrong" });
+      })
   });
 });
 
 router.get("/validate", (req, res, next) => {
-  User.findOne({secret: req.query.secret})
-  .then((user) => {
-    req.login(user, loginError => {
-      req.flash('You are now logged in!');
-      res.redirect("/firststep");
+  User.findOne({ secret: req.query.secret })
+    .then((user) => {
+      req.login(user, loginError => {
+        req.flash('You are now logged in!');
+        res.redirect("/firststep");
       });
-  })
-  .catch(err => {
-    console.log(err)
-  })
-  })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
 
-  router.get("/main-page", (req, res, next) => {
-    User.findOne({ _id: req.user._id })
-      .then(data => {
-        res.render("auth/main-page", { data });
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  });
+router.get("/main-page", (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then(data => {
+      res.render("auth/main-page", { data });
+    })
+    .catch(error => {
+      console.log(error)
+    })
+});
 
 router.get("/profile", (req, res, next) => {
   res.render("profile");
@@ -143,30 +144,55 @@ router.get("/logout", (req, res, next) => {
 });
 
 
-router.post('/firststep', (req, res) => {
+router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
   let sports = req.body.sports;
   let music = req.body.music;
   let learnGroup = req.body.learnGroup;
   let languages = req.body.languages;
   let culinary = req.body.culinary;
   let getInTouch = req.body.getInTouch;
+  let imgPath = req.file.url;
+  let imgName = req.file.originalname;
 
   User.findByIdAndUpdate(req.user._id,
-    {$set: {
-      sports: sports,
-      music: music,
-      learnGroup: learnGroup,
-      languages: languages,
-      culinary: culinary,
-      getInTouch: getInTouch,
-      status: 'Active'
-    }}, 
-    function(err){
-    if(err){
+    {
+      imgPath,
+      imgName,
+      $set: {
+        // imgPath: imgPath,
+        // imgName: imgName,
+        sports: sports,
+        music: music,
+        learnGroup: learnGroup,
+        languages: languages,
+        culinary: culinary,
+        getInTouch: getInTouch,
+        status: 'Active'
+      }
+    },
+    function (err) {
+      if (err) {
         console.log(err);
-    }
-});
+      }
+    });
   res.redirect('../auth/main-page')
 })
+
+// router.post('/firststep', uploadCloud.single('photo'), (req, res, next) => {
+//   const imgPath = req.file.url;
+//   const imgName = req.file.originalname;
+//   User.findByIdAndUpdate(req.user._id, {
+//     imgName,
+//     imgPath
+//   })
+//     .then(() => {
+//       res.redirect('/');
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     })
+// });
+
+
 
 module.exports = router;

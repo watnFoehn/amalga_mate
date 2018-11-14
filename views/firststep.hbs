@@ -1,17 +1,28 @@
 <div id="propic">
 
   <h1>Fill in the fields of interest</h1>
-  <img src="http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" class="imgPro">
-  {{!-- <input type="file" name="pic" accept="image/gif, image/jpeg, image/png"> --}}
-
-  {{!-- <form action="/firststep" method="post" enctype="multipart/form-data">
-    <input type="file" name="photo" accept="image/gif, image/jpeg, image/png">
-  </form> --}}
-
 
 </div>
 <div class="test">
-  <form action="auth/firststep" method="POST" class="container">
+  <form action="/auth/firststep" method="POST" class="container" enctype="multipart/form-data">
+
+
+    <div class="avatar-container">
+
+      <div class="avatar-upload">
+        <div class="avatar-edit">
+          {{!-- <img src="../images/Pencil.png" alt=""> --}}
+          <input type="file" name="photo" id="imageUpload" accept=".png, .jpg, .jpeg" />
+          <label for="imageUpload"></label>
+        </div>
+        <div class="avatar-preview">
+          <div id="imagePreview" style="background-image: url(http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg);">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="flex">
       <h3 class="flex">Sport</h3>
       <label class="switch flex">
