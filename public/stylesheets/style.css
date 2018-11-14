@@ -31,6 +31,11 @@ img {
   margin: 3%;
   width: 6vh; }
 
+.imgPro {
+  margin: 3%;
+  width: 50%;
+  box-shadow: 0px 6px 19px 0px #0000004d; }
+
 a {
   flex: 1;
   color: #072633;
@@ -46,6 +51,13 @@ nav {
   align-items: center;
   color: white;
   width: 100%; }
+
+.test {
+  padding: 5%;
+  border-radius: 6px;
+  background: #ffffff9a;
+  box-shadow: 1px 1px 20px 3px silver;
+  margin: 2%; }
 
 button {
   background: linear-gradient(to bottom, #ff94df, #e64980);
