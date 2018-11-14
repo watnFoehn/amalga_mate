@@ -133,9 +133,15 @@ router.get("/firststep", (req, res, next) => {
 })
 
 router.get("/filtered-page", (req, res, next) => {
-  console.log(req.query)
-  res.render("filtered-page")
-})
+  let query = req.query.q
+  User.find({[query]:{$ne:null}})
+      .then(data => {
+        res.render("filtered-page", { data });
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  })
 
 router.get("/logout", (req, res, next) => {
   req.logout();
