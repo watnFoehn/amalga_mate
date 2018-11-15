@@ -92,7 +92,7 @@ router.post("/signup", (req, res, next) => {
           text: 'Awesome Message',
           html: `Welcome to Amalgamate!
         In order to get started, just click the link and follow the instructions.
-        <a href='${process.env.BASE_URL}/auth/validate?secret=${secret}'>Follow me!</a>`
+        <a href='${process.env.BASE_URL}auth/validate?secret=${secret}'>Follow me!</a>`
         })
       })
 
