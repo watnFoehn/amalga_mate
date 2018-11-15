@@ -1,9 +1,10 @@
 <h1><em>Edit Profile</em></h1>
 
-<form action="/auth/edit-profile" method="post" id="form-container">
+<form action="/auth/edit-profile" method="post" enctype="multipart/form-data">
   {{!-- Change Password: <input value="{{user.password}}" type="text" name="password"> <br>
   Change Email Address: <input value="{{user.email}}" type="text" name="email"><br>
   Location: <input value="{{user.location}}" type="text" name="location"> <br> --}}
+
   <div class="avatar-container">
 
     <div class="avatar-upload">
@@ -12,29 +13,19 @@
         <label for="imageUpload"></label>
       </div>
       <div class="avatar-preview">
-        <div id="imagePreview" style="background-image: url(http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg);">
+        <div id="imagePreview" style="background-image: url({{user.imgPath}});">
         </div>
       </div>
     </div>
   </div>
 
-  <div class="testform field">
-    Sports: <input value="{{user.sports}}" type="text" name="sports">
-    <br>
-    Music: <input value="{{user.music}}" type="text" name="music">
-    <br>
-    Learn Group: <input value="{{user.learnGroup}}" type="text" name="learnGroup">
-    <br>
-    Languages: <input value="{{user.languages}}" type="text" name="languages">
-    <br>
-    Culinary: <input value="{{user.culinary}}" type="text" name="culinary">
-    <br>
-    Get In Touch: <input value="{{user.getInTouch}}" type="text" name="getInTouch">
-    <br>
-  </div>
-  <div class="creatbtn">
-    <button type="submit">SAVE</button>
-  </div>
+  Sports: <input value="{{user.sports}}" type="text" name="sports"><br>
+  Music: <input value="{{user.music}}" type="text" name="music"><br>
+  Learn Group: <input value="{{user.learnGroup}}" type="text" name="learnGroup"><br>
+  Languages: <input value="{{user.languages}}" type="text" name="languages"><br>
+  Culinary: <input value="{{user.culinary}}" type="text" name="culinary"><br>
+  Get In Touch: <input value="{{user.getInTouch}}" type="text" name="getInTouch"><br>
+  <button type="submit">Save</button>
   {{!-- <button><a href="/delete-profile">Delete</a></button> --}}
 </form>
 <a href="/auth/delete-profile/{{user.username}}/delete"><button>Delete</button></a>
