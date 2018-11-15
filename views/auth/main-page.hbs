@@ -1,26 +1,31 @@
 <h1>Main Page</h1>
-{{#if data.sports}}
-<a href="filtered-page?q=sports">Filter for sports</a>
-{{/if}}
-<br>
-{{#if data.music}}
-<a href="filtered-page?q=music">Filter for music</a>
-{{/if}}
-<br>
-{{#if data.learnGroup}}
-<a href="filtered-page?q=learnGroup">Filter for learngroups</a>
-{{/if}}
-<br>
-{{#if data.languages}}
-<a href="filtered-page?q=languages">Filter for languages</a>
-{{/if}}
-<br>
-{{#if data.culinary}}
-<a href="filtered-page?q=culinary">Filter for food</a>
-{{/if}}
-<br>
-{{#if data.getInTouch}}
-<a href="filtered-page?q=getInTouch">Filter for getting in touch</a>
-{{/if}}
-<br>
-<a href="filtered-page?q=username">I can't decide, show all!</a>
+
+<div id="form-container">
+  {{#if data.sports}}
+  <a href="filtered-page?q=sports" class="field">Filter for sports</a>
+  {{/if}}
+  <br>
+  {{#if data.music}}
+  <a href="filtered-page?q=music" class="field">Filter for music</a>
+  {{/if}}
+  <br>
+  {{#if data.learnGroup}}
+  <a href="filtered-page?q=learnGroup" class="field">Filter for learngroups</a>
+  {{/if}}
+  <br>
+  {{#if data.languages}}
+  <a href="filtered-page?q=languages" class="field">Filter for languages</a>
+  {{/if}}
+  <br>
+  {{#if data.culinary}}
+  <a href="filtered-page?q=culinary" class="field">Filter for food</a>
+  {{/if}}
+  <br>
+  {{#if data.getInTouch}}
+  <a href="filtered-page?q=getInTouch" class="field">Filter for getting in touch</a>
+  {{/if}}
+  <br>
+  <br>
+  <br>
+  <a href="filtered-page?q=username">I can't decide, show all!</a>
+</div>

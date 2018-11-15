@@ -1,56 +1,51 @@
 <h1>{{data.username}}</h1>
 <hr>
+<div id="form-container">
+  <div class="avatar-container">
 
-<div class="avatar-container">
+    <div class="avatar-upload">
 
-  <div class="avatar-upload">
-
-    <div class="avatar-preview">
-      <div id="imagePreview" style="background-image: url({{data.imgPath}});">
+      <div class="avatar-preview">
+        <div id="imagePreview" style="background-image: url({{data.imgPath}});">
+        </div>
       </div>
     </div>
   </div>
+  <div class="testform field">
+    <a href="../filtered-page?q=sports">
+      <b>Sports: </b>{{data.sports}}
+    </a>
+    <br>
+    <a href="../filtered-page?q=music">
+      <b>Music: </b>{{data.music}}
+    </a>
+    <br>
+    <a href="../filtered-page?q=learnGroup">
+      <b>Learn Group: </b>{{data.learnGroup}}
+    </a>
+    <br>
+    <a href="../filtered-page?q=languages">
+      <b>Languages: </b>{{data.languages}}
+    </a>
+    <br>
+    <a href="../filtered-page?q=culinary">
+      <b>Culinary: </b>{{data.culinary}}
+    </a>
+    <br>
+    <a href="../filtered-page?q=getInTouch">
+      <b>Get In Touch: </b>{{data.getInTouch}}
+    </a>
+    <hr>
+  </div>
+
+  {{#if isConnectedUser}}
+  <div class="creatbtn">
+    <a href="/auth/edit-profile"><button>EDIT</button></a>
+  </div>
+  {{/if}}
 </div>
 
-<a href="filtered-page?q=sports">
-  <b>Sports: </b>{{data.sports}}
-</a>
-
-<br>
-<a href="filtered-page?q=music">
-  <b>Music: </b>{{data.music}}
-</a>
-<br>
-
-<a href="filtered-page?q=learnGroup">
-  <b>Learn Group: </b>{{data.learnGroup}}
-</a>
-<br>
-
-<a href="filtered-page?q=languages">
-  <b>Languages: </b>{{data.languages}}
-</a>
-<br>
-
-<a href="filtered-page?q=culinary">
-  <b>Culinary: </b>{{data.culinary}}
-</a>
-<br>
-
-<a href="filtered-page?q=getInTouch">
-  <b>Get In Touch: </b>{{data.getInTouch}}
-</a>
-<hr>
+{{!-- <a href="/firststep">BACK TO FIRST STEP</a>
 
 
-{{#if isConnectedUser}}
-<div id="flexbtn">
-  <a href="/auth/edit-profile"><button>EDIT</button></a>
-</div>
-{{/if}}
-
-
-<a href="/firststep">BACK TO FIRST STEP</a>
-
-
-<a href="/filtered-page" class="button">BACK TO FILTER</a>
+<a href="/filtered-page" class="button">BACK TO FILTER</a> --}}
