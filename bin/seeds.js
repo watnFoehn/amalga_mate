@@ -10,7 +10,7 @@ const User = require("../models/User");
 const bcryptSalt = 10;
 
 mongoose
-  .connect('mongodb://localhost/amalga-mate', {useNewUrlParser: true})
+  .connect('mongodb://localhost/amalga-mate', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -30,18 +30,71 @@ let users = [
 ]
 
 User.deleteMany()
-.then(() => {
-  return User.create(users)
-})
-.then(usersCreated => {
-  console.log(`${usersCreated.length} users created with the following id:`);
-  console.log(usersCreated.map(u => u._id));
-})
-.then(() => {
-  // Close properly the connection to Mongoose
-  mongoose.disconnect()
-})
-.catch(err => {
-  mongoose.disconnect()
-  throw err
-})
+  .then(() => {
+    return User.create(users)
+  })
+  .then(usersCreated => {
+    console.log(`${usersCreated.length} users created with the following id:`);
+    console.log(usersCreated.map(u => u._id));
+  })
+  .then(() => {
+    // Close properly the connection to Mongoose
+    mongoose.disconnect()
+  })
+  .catch(err => {
+    mongoose.disconnect()
+    throw err
+  })
+
+////////////////////////////////////////////////
+
+const users = [
+  {
+    username: "Anna",
+    password: "",
+    email: "",
+    imgName: "",
+    imgPath: "",
+    learnGroup: "",
+    languages: "",
+    location: "",
+    getInTouch: "",
+    music: "",
+    sports: "",
+    culinary: "",
+  },
+  {
+    username: "Khalil",
+    password: "",
+    email: "",
+    imgName: "",
+    imgPath: "",
+    learnGroup: "",
+    languages: "",
+    location: "",
+    getInTouch: "",
+    music: "",
+    sports: "",
+    culinary: "",
+  },
+  {
+    username: "Matthias",
+    password: "",
+    email: "",
+    imgName: "",
+    imgPath: "",
+    learnGroup: "",
+    languages: "",
+    location: "",
+    getInTouch: "",
+    music: "",
+    sports: "",
+    culinary: "",
+  }
+];
+
+User.create(users, (err) => {
+  if (err) { throw (err) }
+  console.log(`Created ${users.length} users`)
+  mongoose.connection.close()
+});

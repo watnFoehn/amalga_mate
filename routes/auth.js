@@ -125,30 +125,30 @@ router.get("/main-page", (req, res, next) => {
     })
 });
 
-router.get("/owned-profile", (req, res, next) => {
+router.get("/profile", (req, res, next) => {
   User.findOne({ _id: req.user._id })
     .then(data => {
-      res.render("owned-profile", { data });
+      res.render("my-profile", { data });
     })
     .catch(err => {
       console.log(err)
     })
 });
 
-// router.get("/public-profile/:username", (req, res, next) => {
-//   console.log(req.params.username);
-//   User.findOne({ username: req.params.username })
-//     .then(data => {
-//       res.render("public-profile", { data });
-//     })
-//     .catch(err => {
-//       console.log(err)
-//     })
-// });
+router.get("/profile/:username", (req, res, next) => {
+  console.log(req.params.username);
+  User.findOne({ username: req.params.username })
+    .then(data => {
+      res.render("profile", { data, isConnectedUser: req.user && req.user._id.equals(data._id) });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+});
 
-router.get("/profile", (req, res, next) => {
-  res.render("profile");
-})
+// router.get("/profile", (req, res, next) => {
+//   res.render("profile");
+// })
 
 router.get("/firststep", (req, res, next) => {
   res.render("firststep");
@@ -178,25 +178,24 @@ router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
   let languages = req.body.languages;
   let culinary = req.body.culinary;
   let getInTouch = req.body.getInTouch;
-  let imgPath = req.file.url ? req.file.url : "";
-  let imgName = req.file.originalname;
-console.log(imgPath)
-  User.findByIdAndUpdate(req.user._id,
-    {
-      imgPath,
-      imgName,
-      $set: {
-        // imgPath: imgPath,
-        // imgName: imgName,
-        sports: sports,
-        music: music,
-        learnGroup: learnGroup,
-        languages: languages,
-        culinary: culinary,
-        getInTouch: getInTouch,
-        status: 'Active'
-      }
-    },
+
+  let update = {
+    sports: sports,
+    music: music,
+    learnGroup: learnGroup,
+    languages: languages,
+    culinary: culinary,
+    getInTouch: getInTouch,
+    status: 'Active'
+  }
+
+  if (req.file) {
+    update.imgPath = req.file.url
+    update.imgName = req.file.originalname
+  }
+
+
+  User.findByIdAndUpdate(req.user._id, update,
     function (err) {
       if (err) {
         console.log(err);
@@ -205,21 +204,36 @@ console.log(imgPath)
   res.redirect('../auth/main-page')
 })
 
-// router.post('/firststep', uploadCloud.single('photo'), (req, res, next) => {
-//   const imgPath = req.file.url;
-//   const imgName = req.file.originalname;
-//   User.findByIdAndUpdate(req.user._id, {
-//     imgName,
-//     imgPath
-//   })
-//     .then(() => {
-//       res.redirect('/');
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     })
-// });
+//Route to display the edit form
+router.get('/edit-profile', (req, res, next) => {
+  User.findById(req.user.id)
+    .then(user => {
+      res.render('edit-profile', { user })
+    })
+});
 
+
+//Route to submit the edit form
+router.post('/edit-profile', (req, res, next) => {
+  //Find the user and update it with the info from the form
+  User.findByIdAndUpdate(req.user.id, {
+    // password: req.body.password,
+    // email: req.body.email,
+    //location: req.body.location,
+    learnGroup: req.body.learnGroup,
+    languages: req.body.languages,
+    getInTouch: req.body.getInTouch,
+    music: req.body.music,
+    sports: req.body.sports,
+    culinary: req.body.culinary,
+  })
+    .then(user => {
+      res.redirect('/auth/profile/' + user.username)
+    })
+    .catch(err => {
+      console.log('There was an error', err)
+    })
+});
 
 
 module.exports = router;
