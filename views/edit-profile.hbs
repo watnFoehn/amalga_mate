@@ -1,9 +1,23 @@
 <h1><em>Edit Profile</em></h1>
 
-<form action="/auth/edit-profile" method="post">
+<form action="/auth/edit-profile" method="post" enctype="multipart/form-data">
   {{!-- Change Password: <input value="{{user.password}}" type="text" name="password"> <br>
   Change Email Address: <input value="{{user.email}}" type="text" name="email"><br>
   Location: <input value="{{user.location}}" type="text" name="location"> <br> --}}
+
+  <div class="avatar-container">
+
+    <div class="avatar-upload">
+      <div class="avatar-edit">
+        <input type="file" name="photo" id="imageUpload" accept=".png, .jpg, .jpeg" />
+        <label for="imageUpload"></label>
+      </div>
+      <div class="avatar-preview">
+        <div id="imagePreview" style="background-image: url({{user.imgPath}});">
+        </div>
+      </div>
+    </div>
+  </div>
 
   Sports: <input value="{{user.sports}}" type="text" name="sports"><br>
   Music: <input value="{{user.music}}" type="text" name="music"><br>

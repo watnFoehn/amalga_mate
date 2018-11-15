@@ -214,19 +214,36 @@ router.get('/edit-profile', (req, res, next) => {
 
 
 //Route to submit the edit form
-router.post('/edit-profile', (req, res, next) => {
+router.post('/edit-profile', uploadCloud.single('photo'), (req, res, next) => {
   //Find the user and update it with the info from the form
-  User.findByIdAndUpdate(req.user.id, {
-    // password: req.body.password,
-    // email: req.body.email,
-    //location: req.body.location,
-    learnGroup: req.body.learnGroup,
-    languages: req.body.languages,
-    getInTouch: req.body.getInTouch,
-    music: req.body.music,
-    sports: req.body.sports,
-    culinary: req.body.culinary,
-  })
+
+  // password: req.body.password,
+  // email: req.body.email,
+  // location: req.body.location,
+  // let imgName = req.body.imgName
+  // let imgPath = req.body.imgPath
+  let learnGroup = req.body.learnGroup
+  let languages = req.body.languages
+  let getInTouch = req.body.getInTouch
+  let music = req.body.music
+  let sports = req.body.sports
+  let culinary = req.body.culinary
+
+
+  let update = {
+    learnGroup: learnGroup,
+    languages: languages,
+    getInTouch: getInTouch,
+    music: music,
+    sports: sports,
+    culinary: culinary
+  }
+
+  if (req.file) {
+    update.imgPath = req.file.url
+    update.imgName = req.file.originalname
+  }
+  User.findByIdAndUpdate(req.user._id, update)
     .then(user => {
       res.redirect('/auth/profile/' + user.username)
     })
