@@ -1,3 +1,5 @@
+$fontcolor: #072633;
+
 body {
   display: flex;
   margin: 0;
@@ -10,7 +12,7 @@ body {
 
 a {
   flex: 1;
-  color: rgb(7, 38, 51);
+  color: $fontcolor;
   text-decoration: none;
   font-weight: bold;
   a:hover{
