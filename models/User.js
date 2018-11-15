@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: String,
+  username: {
+    type: String,
+    unique: true,
+  },
   password: String,
   status: {
     type: String,
@@ -16,7 +19,7 @@ const userSchema = new Schema({
   secret: String,
 
   imgName: String,
-  imgPath: String,
+  imgPath: { type: String, default: "http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg" },
   learnGroup: String,
   languages: String,
   location: String,

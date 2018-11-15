@@ -16,12 +16,12 @@ router.get("/filtered-page", (req, res, next) => {
   res.render("filtered-page");
 });
 
-// router.get("/public-profile", (req, res, next) => {
-//   res.render("public-profile");
+// router.get("/profile", (req, res, next) => {
+//   res.render("profile");
 // });
 
-router.get("/owned-profile", (req, res, next) => {
-  res.render("owned-profile");
+router.get("/profile", (req, res, next) => {
+  res.render("profile");
 });
 
 router.get("/check-email", (req, res, next) => {

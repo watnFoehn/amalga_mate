@@ -1,0 +1,16 @@
+<h1><em>Edit Profile</em></h1>
+
+<form action="/auth/edit-profile" method="post">
+  {{!-- Change Password: <input value="{{user.password}}" type="text" name="password"> <br>
+  Change Email Address: <input value="{{user.email}}" type="text" name="email"><br>
+  Location: <input value="{{user.location}}" type="text" name="location"> <br> --}}
+
+  Sports: <input value="{{user.sports}}" type="text" name="sports"><br>
+  Music: <input value="{{user.music}}" type="text" name="music"><br>
+  Learn Group: <input value="{{user.learnGroup}}" type="text" name="learnGroup"><br>
+  Languages: <input value="{{user.languages}}" type="text" name="languages"><br>
+  Culinary: <input value="{{user.culinary}}" type="text" name="culinary"><br>
+  Get In Touch: <input value="{{user.getInTouch}}" type="text" name="getInTouch"><br>
+  <button type="submit">Save</button>
+  {{!-- <button><a href="/delete-profile">Delete</a></button> --}}
+</form>
