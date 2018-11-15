@@ -135,16 +135,16 @@ router.get("/owned-profile", (req, res, next) => {
     })
 });
 
-router.get("/public-profile/:username", (req, res, next) => {
-  console.log(req.params.username);
-  User.findOne({ username: req.params.username })
-    .then(data => {
-      res.render("public-profile", { data });
-    })
-    .catch(err => {
-      console.log(err)
-    })
-});
+// router.get("/public-profile/:username", (req, res, next) => {
+//   console.log(req.params.username);
+//   User.findOne({ username: req.params.username })
+//     .then(data => {
+//       res.render("public-profile", { data });
+//     })
+//     .catch(err => {
+//       console.log(err)
+//     })
+// });
 
 router.get("/profile", (req, res, next) => {
   res.render("profile");
@@ -178,9 +178,9 @@ router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
   let languages = req.body.languages;
   let culinary = req.body.culinary;
   let getInTouch = req.body.getInTouch;
-  let imgPath = req.file.url;
+  let imgPath = req.file.url ? req.file.url : "";
   let imgName = req.file.originalname;
-
+console.log(imgPath)
   User.findByIdAndUpdate(req.user._id,
     {
       imgPath,

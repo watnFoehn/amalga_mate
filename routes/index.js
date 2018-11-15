@@ -20,6 +20,17 @@ router.get("/filtered-page", (req, res, next) => {
 //   res.render("public-profile");
 // });
 
+router.get("/public-profile/:username", (req, res, next) => {
+  console.log(req.params.username);
+  User.findOne({ username: req.params.username })
+    .then(data => {
+      res.render("public-profile", { data });
+    })
+    .catch(err => {
+      console.log(err)
+    })
+});
+
 router.get("/owned-profile", (req, res, next) => {
   res.render("owned-profile");
 });
