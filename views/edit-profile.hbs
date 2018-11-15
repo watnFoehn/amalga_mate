@@ -26,5 +26,6 @@
   Culinary: <input value="{{user.culinary}}" type="text" name="culinary"><br>
   Get In Touch: <input value="{{user.getInTouch}}" type="text" name="getInTouch"><br>
   <button type="submit">Save</button>
-  {{!-- <button><a href="/delete-profile">Delete</a></button> --}}
 </form>
+
+<a href="/auth/delete-profile/{{user.username}}/delete"><button>Delete</button></a>

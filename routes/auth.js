@@ -252,5 +252,15 @@ router.post('/edit-profile', uploadCloud.single('photo'), (req, res, next) => {
     })
 });
 
+router.get('/delete-profile/:username/delete', (req, res, next) => {
+  User.findOneAndRemove({ username: req.params.username })
+    .then(user => {
+      res.redirect('/')
+    })
+    .catch(err => {
+      console.log('Error', err)
+    })
+})
+
 
 module.exports = router;
