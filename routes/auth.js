@@ -125,15 +125,15 @@ router.get("/main-page", (req, res, next) => {
     })
 });
 
-router.get("/profile", (req, res, next) => {
-  User.findOne({ _id: req.user._id })
-    .then(data => {
-      res.render("my-profile", { data });
-    })
-    .catch(err => {
-      console.log(err)
-    })
-});
+// router.get("/profile", (req, res, next) => {
+//   User.findOne({ _id: req.user._id })
+//     .then(data => {
+//       res.render("my-profile", { data });
+//     })
+//     .catch(err => {
+//       console.log(err)
+//     })
+// });
 
 router.get("/profile/:username", (req, res, next) => {
   console.log(req.params.username);
