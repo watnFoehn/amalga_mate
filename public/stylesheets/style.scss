@@ -21,20 +21,26 @@ a {
   }
 }
 
+img {
+  margin: 3%;
+  width: 6vh;
+}
+
 nav {
   position: fixed;
   display: flex;
-  // background:
-  // linear-gradient(
-  //   #ffe240ab, #fa6ca06e
-  // );
-
-box-shadow: 0px 1px black;
+  box-shadow: 0px 1px black;
+  background-image: url('http://subtlepatterns.com/patterns/ricepaper.png');
   text-decoration: none;
+  z-index: 23;
   text-align: center;
   align-items: center;
   color: black;
   width: 100%;
+  img{
+    margin-top: 1%;
+    margin-bottom: 0;
+  }
 }
 
 h1{
@@ -49,35 +55,35 @@ ul{
   flex-direction: column;
 }
 
-// .flexdirection {
-  // }
+li{
+  flex: 1;
+  text-align: center;
+  padding: 2% 0px;
+}
   
-  li{
-    flex: 1;
-    text-align: left;
-    padding: 2% 0px;
-  }
-  
-  img {
-    margin: 3%;
-    width: 6vh;
-  }
   
   button {
-    background: linear-gradient(to bottom,#ff94df, #e64980);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    border: 2px solid rgb(155, 76, 175); /* Green */
+    // background: linear-gradient(to bottom,#ff94df, #e64980);
     border-radius: 16px;
     width: 80px;
     height: 40px;
     margin: 5px;
-    color: white;
+    // color: white;
     font-size: 16px;
+    font-weight: 600;
     flex-direction: row;
-    text-shadow: 1px 1px 2px black;
+    // text-shadow: 1px 1px 2px black;
     flex: 1;
     a {
       color:white;
     text-decoration: none;
   }
+}
+button:hover{
+  border: 2px solid rgb(46, 184, 172);
 }
 
 hr{
@@ -101,11 +107,24 @@ hr{
 }
 
 #navlink {
-  font-size: 2vh;
+  font-size: 2.5vh;
+}
+#navlink:hover {
+  font-size: 2.7vh;
+  text-decoration: underline;
+  
 }
 
 #flex1{
   flex: 1;
+}
+
+#fontM {
+  font-size: 4vh;
+}
+
+#pdle{
+  padding: 20px 50px;
 }
 
 .wrap {
