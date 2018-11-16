@@ -3,13 +3,22 @@
 {{!-- https://balsamiq.cloud/sw2slnu/py6rvpu/r2835 --}}
 
 What you filtered for:
-
+<hr>
 <ul>
   {{date.username}}
   {{#each data}}
   <a href='/auth/profile/{{this.username}}'>
     <li>{{this.username}}</li>
   </a>
+  <div class="avatar-container">
+    <div class="avatar-upload">
+      <div class="avatar-preview">
+        <div id="imagePreview" style="background-image: url({{this.imgPath}});">
+        </div>
+      </div>
+    </div>
+  </div>
   {{/each}}
 </ul>
+<hr>
 {{!-- <a href=`profile/{{data.username}}`>{{data.username}} </a> --}}

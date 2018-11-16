@@ -1,4 +1,7 @@
 ////////////////////////////////////////////////
+const mongoose = require('mongoose');
+const User = require("../models/User.js");
+
 mongoose
   .connect(
     process.env.MONGODB_URI,
@@ -113,7 +116,7 @@ const users = [
     culinary: "Köttbullar",
   },
   {
-    username: "Angeli",
+    username: "Angali",
     password: "",
     email: "angel@skyr.oof",
     imgName: "",
@@ -283,7 +286,7 @@ const users = [
   {
     username: "Lindsay",
     password: "",
-    email: "l.@gmx.net",
+    email: "laber@gmx.net",
     imgName: "",
     imgPath: "",
     learnGroup: "yes, I would love to meet up",
@@ -297,7 +300,7 @@ const users = [
   {
     username: "Feli",
     password: "",
-    email: "l.@gmx.net",
+    email: "feli@gmail.com",
     imgName: "",
     imgPath: "",
     learnGroup: "",
@@ -325,7 +328,7 @@ const users = [
   {
     username: "Samantha",
     password: "",
-    email: "l.@gmx.net",
+    email: "manta@gmx.net",
     imgName: "",
     imgPath: "",
     learnGroup: "I teach CSS Styling",
