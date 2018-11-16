@@ -17,7 +17,6 @@ a {
 
 nav {
   display: flex;
-  background: linear-gradient("#ffe240ab", "#fa6ca06e");
   text-decoration: none;
   text-align: center;
   align-items: center;

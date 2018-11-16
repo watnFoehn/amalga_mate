@@ -1,12 +1,12 @@
-<h1>Filtered Page</h1>
+<h1>Your search results:</h1>
 
 {{!-- https://balsamiq.cloud/sw2slnu/py6rvpu/r2835 --}}
 
-What you filtered for:
-<hr>
+
+
 <ul>
-  {{date.username}}
   {{#each data}}
+  <br>
   <a href='/auth/profile/{{this.username}}'>
     <li>{{this.username}}</li>
   </a>
@@ -18,7 +18,7 @@ What you filtered for:
       </div>
     </div>
   </div>
+  <hr>
   {{/each}}
 </ul>
-<hr>
 {{!-- <a href=`profile/{{data.username}}`>{{data.username}} </a> --}}
