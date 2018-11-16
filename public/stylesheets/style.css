@@ -16,8 +16,9 @@ a {
     text-shadow: 2px 2px 4px black; }
 
 nav {
+  position: fixed;
   display: flex;
-  background: linear-gradient(#ffe240ab, #fa6ca06e);
+  box-shadow: 0px 1px black;
   text-decoration: none;
   text-align: center;
   align-items: center;
@@ -285,6 +286,8 @@ textarea {
   font-size: 15px; }
 
 footer {
+  position: fixed;
+  bottom: 0;
   display: flex;
   background: linear-gradient(to bottom, #75679c, #1b183a);
   justify-content: space-around;

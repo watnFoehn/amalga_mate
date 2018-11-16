@@ -22,11 +22,14 @@ a {
 }
 
 nav {
+  position: fixed;
   display: flex;
-  background:
-  linear-gradient(
-    #ffe240ab, #fa6ca06e
-  );
+  // background:
+  // linear-gradient(
+  //   #ffe240ab, #fa6ca06e
+  // );
+
+box-shadow: 0px 1px black;
   text-decoration: none;
   text-align: center;
   align-items: center;
@@ -350,6 +353,8 @@ textarea{
 
 // FOOTER
 footer {
+  position: fixed;
+  bottom: 0;
   display: flex;
   background: linear-gradient(to bottom, rgb(117, 103, 156), rgb(27, 24, 58));
   justify-content: space-around;
