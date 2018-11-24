@@ -1,12 +1,11 @@
 <h1><em>Edit Profile</em></h1>
 
-<form action="/auth/edit-profile" method="post" enctype="multipart/form-data">
+<form action="/auth/edit-profile" method="post" enctype="multipart/form-data" id="form-container">
   {{!-- Change Password: <input value="{{user.password}}" type="text" name="password"> <br>
   Change Email Address: <input value="{{user.email}}" type="text" name="email"><br>
   Location: <input value="{{user.location}}" type="text" name="location"> <br> --}}
 
-  <div class="avatar-container">
-
+  <div class="avatar-container" id="pdle">
     <div class="avatar-upload">
       <div class="avatar-edit">
         <input type="file" name="photo" id="imageUpload" accept=".png, .jpg, .jpeg" />
@@ -18,14 +17,28 @@
       </div>
     </div>
   </div>
-
-  Sports: <input value="{{user.sports}}" type="text" name="sports"><br>
-  Music: <input value="{{user.music}}" type="text" name="music"><br>
-  Learn Group: <input value="{{user.learnGroup}}" type="text" name="learnGroup"><br>
-  Languages: <input value="{{user.languages}}" type="text" name="languages"><br>
-  Culinary: <input value="{{user.culinary}}" type="text" name="culinary"><br>
-  Get In Touch: <input value="{{user.getInTouch}}" type="text" name="getInTouch"><br>
-  <button type="submit">Save</button>
-  {{!-- <button><a href="/delete-profile">Delete</a></button> --}}
+  <div class="testform field">
+    Sports: <input value="{{user.sports}}" type="text" name="sports">
+    <br>
+    Music: <input value="{{user.music}}" type="text" name="music">
+    <br>
+    Learn Group: <input value="{{user.learnGroup}}" type="text" name="learnGroup">
+    <br>
+    Languages: <input value="{{user.languages}}" type="text" name="languages">
+    <br>
+    Culinary: <input value="{{user.culinary}}" type="text" name="culinary">
+    <br>
+    Get In Touch: <input value="{{user.getInTouch}}" type="text" name="getInTouch">
+  </div>
+  <br>
+  <div class="creatbtn">
+    <button type="submit">Save</button>
+  </div>
 </form>
-<a href="/auth/delete-profile/{{user.username}}/delete"><button>Delete</button></a>
+<div id="form-container">
+  <a href="/auth/delete-profile/{{user.username}}/delete" class="creatbtn"><button>Delete</button></a>
+<br>
+<br>
+<br>
+<br>
+</div>

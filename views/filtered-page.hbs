@@ -7,16 +7,18 @@
 <ul>
   {{#each data}}
   <br>
-  <a href='/auth/profile/{{this.username}}'>
-    <li>{{this.username}}</li>
-  </a>
-  <div class="avatar-container">
+  <div class="avatar-container" onclick="javascript:window.location=`/auth/profile/{{this.username}}`;">
     <div class="avatar-upload">
       <div class="avatar-preview">
         <div id="imagePreview" style="background-image: url({{this.imgPath}});">
         </div>
       </div>
     </div>
+  </div>
+  <div class="flex">
+    <a href='/auth/profile/{{this.username}}'>
+      <li id="fontM">{{this.username}}</li>
+    </a>
   </div>
   <hr>
   {{/each}}
