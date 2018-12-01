@@ -3,9 +3,12 @@
 <h2>Introduction</h2>
 
 Amalgamate is our second project during the nine week web dev bootcamp with Ironhack (Berlin). We had five days to build we and started after being in the bootcamp for five weeks.
-It was developed in a team of three: 
+It was developed in a team of three:
+<br/>
 <a href="https://github.com/Lorberta">https://github.com/Lorberta</a>
+<br/>
 <a href="https://github.com/GutuGaluppo">https://github.com/GutuGaluppo</a>
+<br/>
 <a href="https://github.com/watnFoehn">https://github.com/watnFoehn</a>
 
 <h2> What is Amalgamate?</h2>
