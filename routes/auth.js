@@ -91,7 +91,7 @@ router.post("/signup", (req, res, next) => {
           subject: 'Activate AMALGAMATE',
           text: 'Awesome Message',
           html: `Welcome to Amalgamate!
-        In order to get started, just click the link and follow the instructions.
+        In order to get started, just  the link and follow the instructions.
         <a href='${process.env.BASE_URL}/auth/validate?secret=${secret}'>Follow me!</a>`
         })
       })
@@ -145,6 +145,7 @@ router.get("/profile/:username", (req, res, next) => {
       console.log(err)
     })
 });
+
 
 // router.get("/profile", (req, res, next) => {
 //   res.render("profile");

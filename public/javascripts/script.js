@@ -34,7 +34,13 @@ $(document).ready(function () {
   $("#getintch").click(function () {
     $("#toggle7").toggle();
   });
+
+  /* $("#clickpic").click(function(){
+    window.location.href='/profile/:username'
+    console.log("clicked clickpic");
+  }) */
 });
+
 
 
 function readURL(input) {
