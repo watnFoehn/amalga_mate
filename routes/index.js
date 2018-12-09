@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 
-
-/* GET home page */
 router.get('/', (req, res, next) => {
   res.render('index');
 });
@@ -15,10 +13,6 @@ router.get("/firststep", (req, res, next) => {
 router.get("/filtered-page", (req, res, next) => {
   res.render("filtered-page");
 });
-
-// router.get("/profile", (req, res, next) => {
-//   res.render("profile");
-// });
 
 router.get("/profile", (req, res, next) => {
   res.render("profile");

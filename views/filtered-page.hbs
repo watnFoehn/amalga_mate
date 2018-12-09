@@ -1,24 +1,20 @@
 <h1>Your search results:</h1>
-
-{{!-- https://balsamiq.cloud/sw2slnu/py6rvpu/r2835 --}}
-
-
-
 <ul>
   {{#each data}}
   <br>
-  <a href='/auth/profile/{{this.username}}'>
-    <li>{{this.username}}</li>
-  </a>
-  <div class="avatar-container" id="clickpic" onclick="javascript:window.location=`/auth/profile/{{this.username}}`;">
-    <div class="avatar-upload" id="clickpic">
-      <div class="avatar-preview" id="clickpic">
-        <div id="imagePreview clickpic" style="background-image: url({{this.imgPath}});">
+  <div class="avatar-container" onclick="javascript:window.location=`/auth/profile/{{this.username}}`;">
+    <div class="avatar-upload">
+      <div class="avatar-preview">
+        <div id="imagePreview" style="background-image: url({{this.imgPath}});">
         </div>
       </div>
     </div>
   </div>
+  <div class="flex">
+    <a href='/auth/profile/{{this.username}}'>
+      <li id="fontM">{{this.username}}</li>
+    </a>
+  </div>
   <hr>
   {{/each}}
 </ul>
-{{!-- <a href=`profile/{{data.username}}`>{{data.username}} </a> --}}

@@ -24,7 +24,6 @@ passport.use(new LocalStrategy({
 
       if (foundUser.status != 'Active') {
         done(null, false);
-        // res.redirect('/firststep')
         return;
       } 
 

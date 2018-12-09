@@ -19,19 +19,11 @@ let transporter = nodemailer.createTransport({
   }
 });
 
-/* req.login(user, function(err) {
-  if (err) { return next(err); }
-  return res.redirect('/firststep/' + req.user._id);
-}); */
-
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
-/* We need to make sure that this will only be true if the status is something like:
-Never logged in before */
 router.post("/login", passport.authenticate("local",
-
   {
     successRedirect: "main-page",
     failureRedirect: "/check-email",
@@ -78,11 +70,9 @@ router.post("/signup", (req, res, next) => {
       secret
     });
 
-
-
     newUser.save()
       .then(() => {
-        res.redirect("/check-email"); //redirect to a message page to check your mail (online)
+        res.redirect("/check-email");
       })
       .then(() => {
         transporter.sendMail({
@@ -136,7 +126,6 @@ router.get("/profile", (req, res, next) => {
 });
 
 router.get("/profile/:username", (req, res, next) => {
-  console.log(req.params.username);
   User.findOne({ username: req.params.username })
     .then(data => {
       res.render("profile", { data, isConnectedUser: req.user && req.user._id.equals(data._id) });
@@ -145,11 +134,6 @@ router.get("/profile/:username", (req, res, next) => {
       console.log(err)
     })
 });
-
-
-// router.get("/profile", (req, res, next) => {
-//   res.render("profile");
-// })
 
 router.get("/firststep", (req, res, next) => {
   res.render("firststep");
@@ -170,7 +154,6 @@ router.get("/logout", (req, res, next) => {
   req.logout();
   res.redirect("/");
 });
-
 
 router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
   let sports = req.body.sports;
@@ -195,7 +178,6 @@ router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
     update.imgName = req.file.originalname
   }
 
-
   User.findByIdAndUpdate(req.user._id, update,
     function (err) {
       if (err) {
@@ -205,7 +187,7 @@ router.post('/firststep', uploadCloud.single('photo'), (req, res) => {
   res.redirect('../auth/main-page')
 })
 
-//Route to display the edit form
+
 router.get('/edit-profile', (req, res, next) => {
   User.findById(req.user.id)
     .then(user => {
@@ -214,22 +196,14 @@ router.get('/edit-profile', (req, res, next) => {
 });
 
 
-//Route to submit the edit form
 router.post('/edit-profile', uploadCloud.single('photo'), (req, res, next) => {
-  //Find the user and update it with the info from the form
-
-  // password: req.body.password,
-  // email: req.body.email,
-  // location: req.body.location,
-  // let imgName = req.body.imgName
-  // let imgPath = req.body.imgPath
+  
   let learnGroup = req.body.learnGroup
   let languages = req.body.languages
   let getInTouch = req.body.getInTouch
   let music = req.body.music
   let sports = req.body.sports
   let culinary = req.body.culinary
-
 
   let update = {
     learnGroup: learnGroup,
@@ -262,6 +236,5 @@ router.get('/delete-profile/:username/delete', (req, res, next) => {
       console.log('Error', err)
     })
 })
-
 
 module.exports = router;

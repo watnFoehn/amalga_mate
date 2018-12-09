@@ -4,8 +4,6 @@ $(document).ready(function () {
     console.log('TEST JS imported successfully!');
 
   }, false);
-  
-  // SHOW/HIDE TEXTAREA 
 
   $("#sport").click(function () {
     $("#toggle1").toggle();
@@ -34,14 +32,7 @@ $(document).ready(function () {
   $("#getintch").click(function () {
     $("#toggle7").toggle();
   });
-
-  /* $("#clickpic").click(function(){
-    window.location.href='/profile/:username'
-    console.log("clicked clickpic");
-  }) */
 });
-
-
 
 function readURL(input) {
   if (input.files && input.files[0]) {
